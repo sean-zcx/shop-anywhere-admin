@@ -1,0 +1,153 @@
+/* ========= Base Reset (minimal) ========= */
+.admin {
+  min-height: 100vh;
+  background: #f5f7fb; /* light page background */
+  color: #0f172a; /* slate-900-ish */
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* ========= Layout variables ========= */
+:root {
+  --header-h: 56px;
+  --sidebar-w: 15vw;         /* 15% */
+  --sidebar-min: 150px;      /* keep usable on small screens */
+  --sidebar-max: 360px;      /* keep sane on huge screens */
+
+  --blue-700: #1d4ed8;       /* sidebar background */
+  --blue-600: #2563eb;       /* hover */
+  --blue-300: #93c5fd;       /* active (light blue) */
+  --blue-950: #172554;       /* active text */
+}
+
+/* ========= Header ========= */
+.admin__header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--header-h);
+  background: #ffffff;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+  z-index: 50;
+}
+
+.admin__headerInner {
+  height: 100%;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin__brand {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.admin__user {
+  font-size: 14px;
+  color: rgba(15, 23, 42, 0.7);
+}
+
+/* ========= Body container ========= */
+.admin__body {
+  padding-top: var(--header-h);
+  min-height: calc(100vh - var(--header-h));
+}
+
+/* ========= Sidebar ========= */
+.admin__sidebar {
+  position: fixed;
+  top: var(--header-h);
+  bottom: 0;
+  left: 0;
+
+  width: clamp(var(--sidebar-min), var(--sidebar-w), var(--sidebar-max));
+  background: var(--blue-700);
+  color: rgba(255, 255, 255, 0.95);
+
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  overflow-y: auto;
+}
+
+.admin__sidebarTop {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.admin__sidebarTitle {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.admin__sidebarSub {
+  margin-top: 2px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* ========= Nav ========= */
+.admin__nav {
+  padding: 12px;
+  display: grid;
+  gap: 6px;
+}
+
+.admin__navItem {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.92);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: background-color 150ms ease, color 150ms ease, transform 80ms ease;
+}
+
+.admin__navItem:hover {
+  background: var(--blue-600);
+}
+
+.admin__navItem:active {
+  transform: translateY(1px);
+}
+
+/* active state (淡蓝色) */
+.admin__navItem.is-active {
+  background: var(--blue-300);
+  color: var(--blue-950);
+}
+
+/* keyboard focus */
+.admin__navItem:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 2px;
+}
+
+/* ========= Content ========= */
+.admin__content {
+  /* push content right by sidebar width */
+  margin-left: clamp(var(--sidebar-min), var(--sidebar-w), var(--sidebar-max));
+  min-height: calc(100vh - var(--header-h));
+  padding: 16px;
+}
+
+/* optional: center content and keep max width */
+.admin__content > * {
+  max-width: 1400px;
+}
+
+/* ========= Responsive (optional) =========
+   On very small screens, you might want sidebar to overlay instead.
+   For now we keep it fixed; adjust as needed. */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-w: 72vw; /* make sidebar wider on small screens */
+  }
+
+  .admin__content {
+    padding: 14px;
+  }
+}
